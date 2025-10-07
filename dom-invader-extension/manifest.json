@@ -1,0 +1,57 @@
+{
+    "name": "DOM Invader",
+    "version": "2.0.5",
+    "description": "DOM Invader is a browser extension that adds functionality to Chrome to help with security testing.",
+    "content_scripts": [
+        {
+            "run_at": "document_start",
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "js": [
+                "./content-scripts/postmessage-instrumentation.js","./content-scripts/augmented-dom-instrumentation.js"
+            ],
+            "all_frames": true,
+            "match_about_blank": true,
+            "world": "MAIN"
+        },
+        {
+            "run_at": "document_start",
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "js": [
+                "./content-scripts/connection.js", "./content-scripts/postmessage.js", "./content-scripts/augmented-dom.js"
+            ],
+            "all_frames": true,
+            "match_about_blank": true,
+            "world": "ISOLATED"
+        }
+    ],
+    "background": {
+        "service_worker": "./background/dom-invader-service-worker.js",
+        "type": "module"
+    },
+    "devtools_page": "./devtools/devtools.html",
+    "action": {
+        "default_title": "DOM Invader",
+        "default_popup": "./settings/settings.html",  
+        "default_icon": {
+            "16": "images/DomInvader-16.png",
+            "32": "images/DomInvader-32.png",
+            "48": "images/DomInvader-48.png",
+            "128": "images/DomInvader-128.png"
+        }
+      },
+    "permissions": ["activeTab","tabs","webNavigation","storage","clipboardWrite","webRequest","scripting","declarativeNetRequest","declarativeNetRequestFeedback"],
+    "host_permissions": ["https://*/*","http://*/*"],
+    "icons": {
+        "16": "images/DomInvader-16.png",
+        "32": "images/DomInvader-32.png",
+        "48": "images/DomInvader-48.png",
+        "128": "images/DomInvader-128.png"
+    },
+    "manifest_version": 3
+}

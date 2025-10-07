@@ -1,0 +1,59 @@
+{
+    "name": "Burp Suite",
+    "version": "2.0.20",
+    "description": "Burp Suite Chromium Extension which contains DOM Invader and the Burp Suite Navigation recorder.",
+    "background": {
+      "service_worker": "./service-worker/container-service-worker.js",
+      "type": "module"
+    },
+    "content_scripts": [
+        {
+          "run_at": "document_start",
+          "matches": [
+            "http://*/*",
+            "https://*/*"
+          ],
+          "js": [
+            "./dom-invader-extension/content-scripts/postmessage-instrumentation.js","./dom-invader-extension/content-scripts/augmented-dom-instrumentation.js"
+          ],
+          "all_frames": true,
+          "match_about_blank": true,
+          "world": "MAIN"
+        },
+        {
+          "run_at": "document_start",
+          "matches": ["http://*/*", "https://*/*"],        
+          "js": [
+            "./dom-invader-extension/content-scripts/connection.js",
+            "./dom-invader-extension/content-scripts/postmessage.js",
+            "./dom-invader-extension/content-scripts/augmented-dom.js",
+            "./navigation-recorder/content-scripts/classes/Recorder.js"
+          ],
+          "all_frames": true,
+          "match_about_blank": true
+        }
+    ],
+    "chrome_url_overrides": {
+        "newtab": "./new-tab/newtab.html"
+    },
+    "devtools_page": "./dom-invader-extension/devtools/devtools.html",
+    "action": {
+        "default_title": "Burp Suite Container extension",   
+        "default_popup": "./popup/popup.html",
+        "default_icon": {
+            "16": "images/BurpSuite-Container-16.png",
+            "32": "images/BurpSuite-Container-32.png",
+            "48": "images/BurpSuite-Container-48.png",
+            "128": "images/BurpSuite-Container-128.png"              
+        }
+      },
+    "permissions": ["activeTab","storage","tabs","clipboardWrite","webNavigation","privacy","notifications","webRequest","scripting","offscreen","declarativeNetRequest","declarativeNetRequestFeedback"],
+    "host_permissions": ["https://*/*","http://*/*"],
+    "icons": {
+        "16": "images/BurpSuite-Container-16.png",
+        "32": "images/BurpSuite-Container-32.png",
+        "48": "images/BurpSuite-Container-48.png",
+        "128": "images/BurpSuite-Container-128.png"
+    },
+    "manifest_version": 3
+}

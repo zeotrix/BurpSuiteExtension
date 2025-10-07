@@ -5,7 +5,7 @@ The BurpSuite Dom Invador extention that only exists in Burp own chromium browse
 ### 1. Clone to the google chrome path
 - In your Chrome browser, type `chrome://version` into the address bar and press Enter.
 * In the __Profile Path__ section copy the address and go to the address in your os and find `extension` folder and go to it.
-+ clone this project here: `git clone [BurpSuiteExtension](https://github.com/zeotrix/BurpSuiteExtension.git)`
++ clone this project here: `git clone https://github.com/zeotrix/BurpSuiteExtension.git`
 
 ### 2. Open the Extensions Page:
    In your Chrome browser, type `chrome://extensions` into the address bar and press Enter.
